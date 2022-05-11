@@ -12,14 +12,20 @@ function App() {
     const [leeftijd, setLeeftijd] = useState('')
     const [postcode, setPostcode] = useState('')
     const [bezorgFrequentie, setBezorgFrequentie] = useState('')
-    const [bezorgMoment, setBezorgMoment] = useState('')
-
+    const [bezorgMoment, setBezorgMoment] = useState('overdag')
+    const [opmerking, setOpmerking] = useState('')
+    const [akkoord, setAkkoord] = useState(false)
 
     function handleReset() {
         setBananaCounter(0);
         setAambeienCounter(0);
         setAppelCounter(0);
         setKiwiCounter(0);
+    }
+
+    function handleSubmit(e) {
+        console.log({bananaCounter}, {aambeienCounter}, {appelCounter}, {kiwiCounter}, {voornaam}, {achternaam}, {leeftijd}, {postcode}, {bezorgFrequentie}, {bezorgMoment}, {opmerking});
+        e.preventDefault();
     }
 
     return (
@@ -102,56 +108,70 @@ function App() {
                 <input type="text"
                        id="achternaam"
                        value={achternaam}
-                       onChange={(e) => setAchternaam(e.target.value)}/>/>
+                       onChange={(e) => setAchternaam(e.target.value)}/>
                 <label htmlFor="leeftijd">Leeftijd</label>
                 <input type="number"
                        id="leeftijd"
                        placeholder="0"
                        value={leeftijd}
-                       onChange={(e) => setLeeftijd(e.target.value)}/>/>
+                       onChange={(e) => setLeeftijd(e.target.value)}/>
                 <label htmlFor="postcode">Postcode</label>
                 <input type="text"
                        id="postcode"
                        value={postcode}
-                       onChange={(e) => setPostcode(e.target.value)}/>/>
+                       onChange={(e) => setPostcode(e.target.value)}/>
                 <label htmlFor="bezorgfrequentie">Bezorgfrequentie</label>
                 <select name="bezorgfrequentie"
                         id="bezorgfrequentie"
                         value={bezorgFrequentie}
-                        onChange={(e) => setBezorgFrequentie(e.target.value)}/>>
+                        onChange={(e) => setBezorgFrequentie(e.target.value)}>
                     <option value="wekelijks">Iedere week</option>
                     <option value="tweewekelijks">Iedere twee weken</option>
                     <option value="maandelijks">Iedere maand</option>
                 </select>
                 <span>
-                    <input type="radio"
-                           id="overdag"
-                           name="bezorgmoment"
-                           value="overdag">
-                    </input>
+                    <input
+                        type="radio"
+                        name="bezorgmoment"
+                        id="overdag"
+                        value="overdag"
+                        checked={bezorgMoment === "overdag"}
+                        onChange={(e) => setBezorgMoment(e.target.value)}
+                    />
                     <label htmlFor="overdag">Overdag</label>
-                    <input type="radio"
-                           id="avond"
-                           name="bezorgmoment"
-                           value="avond">
-                    </input>
-                    <label htmlFor="avond">'s avonds</label>
+                    <input
+                        type="radio"
+                        name="bezorgmoment"
+                        id="avond"
+                        value="avond"
+                        checked={bezorgMoment === "avond"}
+                        onChange={(e) => setBezorgMoment(e.target.value)}
+                    />
+                    <label htmlFor="avond">'s Avonds</label>
                 </span>
                 <label htmlFor="comment">Opmerkingen</label>
                 <textarea id="comment"
-                          name="comment">
+                          name="comment"
+                          value={opmerking}
+                          onChange={(e) => setOpmerking(e.target.value)}
+                >
                     Plaats hier eventuele opmerkingen
                 </textarea>
                 <span>
                     <input type="checkbox"
-                           id="akkoord"/>
+                           id="akkoord"
+                           checked={akkoord}
+                           onChange={() => setAkkoord(!akkoord)}
+                    />
                     <label htmlFor="akkoord">Ik ga akkoord met de voorwaarden</label>
                 </span>
 
             </form>
-            <button type="submit"
-                    id="submit"
-                    value="submit">
+            <button id="submit"
+                    value="submit"
+                    disabled={!akkoord}
+                    type="submit"
+                    onClick={handleSubmit}>
                 Verzend
             </button>
         </>
