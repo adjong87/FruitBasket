@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useState} from 'react';
+import Counter from "./assets/Components/fruitCounter";
 
 
 function App() {
@@ -30,75 +31,24 @@ function App() {
 
     return (
         <>
-            <h1>Fruitmand bezorgservice</h1>
-            <p>Aambeien</p>
-            <button
-                type="button"
-                onClick={() => setAambeienCounter(aambeienCounter - 1)}
-                disabled={aambeienCounter === 0}
-            >
-                -
-            </button>
-            {aambeienCounter}
-            <button
-                type="button"
-                onClick={() => setAambeienCounter(aambeienCounter + 1)}>
-                +
-            </button>
-
-            <p>Bananen</p>
-            <button
-                type="button"
-                onClick={() => setBananaCounter(bananaCounter - 1)}
-                disabled={bananaCounter === 0}>
-
-                -
-            </button>
-            {bananaCounter}
-            <button
-                type="button"
-                onClick={() => setBananaCounter(bananaCounter + 1)}
-            >
-                +
-            </button>
-
-            <p>Appels</p>
-            <button
-                type="button"
-                onClick={() => setAppelCounter(appelCounter - 1)}
-                disabled={appelCounter === 0}
-            >
-                -
-            </button>
-            {appelCounter}
-            <button
-                type="button"
-                onClick={() => setAppelCounter(appelCounter + 1)}>
-                +
-            </button>
-
-            <p>Kiwi's</p>
-            <button
-                type="button"
-                onClick={() => setKiwiCounter(kiwiCounter - 1)}
-                disabled={kiwiCounter === 0}>
-                -
-            </button>
-            {kiwiCounter}
-            <button
-                type="button"
-                onClick={() => setKiwiCounter(kiwiCounter + 1)}>
-                +
-            </button>
-
-            <button
-                type="button"
-                onClick={handleReset}>
-                reset
-            </button>
-
-
+            <Counter
+                emoji="🍌"
+                title="Bananen"
+            />
+            <Counter
+                emoji="🍓"
+                title="Aardbeien"
+            />
+            <Counter
+                emoji="🍏"
+                title="Appels"
+            />
+            <Counter
+                emoji="🥝"
+                title="Kiwi's"
+            />
             <form>
+
                 <label htmlFor="voornaam">Voornaam</label>
                 <input type="text"
                        id="voornaam"
